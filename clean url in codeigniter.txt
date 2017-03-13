@@ -1,0 +1,12 @@
+add .htaccess file in the root directory
+
+config.php (codeigniter file)
+=> $config['index_page'] = '';
+=> $config['uri_protocol'] = 'PATH_INFO' or
+			     'QUERY_STRING' or
+			     'REQUEST_URI' or
+			     'ORIG_PATH_INFO'
+
+httpd.conf (apache file)
+=> AllowOverride All
+=> LoadModule rewrite_module modules/mod_rewrite.so

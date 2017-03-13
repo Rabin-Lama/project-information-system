@@ -1,0 +1,14 @@
+/* Author: Rabin Lama Dong */
+
+.submit-button {
+    margin-left: 10px;
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+.full-width-button {
+	width: 100%;
+	cursor: pointer;
+}
