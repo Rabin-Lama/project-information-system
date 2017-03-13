@@ -1,5 +1,5 @@
 <?php
-	defined('BASEPATH') OR exit('No drect script access allowed');
+	defined('BASEPATH') OR exit('No direct script access allowed');
 
 	class Dashboard extends MY_Controller {
 
