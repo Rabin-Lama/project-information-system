@@ -23,7 +23,7 @@
 		<form class="form-horizontal" method="POST" action="<?php echo base_url('project/add_project_info'); ?>">
 	      	<div class="box-body">
 		      	<div class="row">
-		      		<div class="col-md-6">
+		      		a<div class="col-md-6">
 			        	<div class="form-group">
 			          		<label for="project_name" class="col-sm-4 control-label">Project Name</label>
 				          	<div class="col-sm-8">
