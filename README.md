@@ -8,4 +8,19 @@ interface and logical structure to access these libraries. CodeIgniter lets
 you creatively focus on your project by minimizing the amount of code needed
 for a given task.
 
-# Import the database from the "project_information_system.sql" to your database named "project_information_system"
+# Database
+Import the given sql file (i.e. project_information_system.sql) into your database named as 'project_information_system'
+
+# Localhost config
+For the database connection, following credentials are used:
+
+host: localhost
+
+username: root
+
+password: rabin
+
+# Application login info
+username: admin
+
+password: admin
