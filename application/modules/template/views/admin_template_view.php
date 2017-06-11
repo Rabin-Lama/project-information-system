@@ -231,6 +231,11 @@
             <i class="fa fa-user-plus"></i> <span>Add new employee ...</span>
           </a>
         </li>
+        <li class="treeview <?php echo ($this->uri->segment(2)=='add_operation_info') ? 'active':''; ?>">
+          <a href="<?php echo base_url(); ?>operation/add_operation_info">
+            <i class="fa fa-plus"></i> <span>Add operation info ...</span>
+          </a>
+        </li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-product-hunt"></i>

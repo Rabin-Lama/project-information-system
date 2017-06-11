@@ -52,5 +52,19 @@
 
 			return $data;
 		}
+
+		public function select_job_title_where($id) {
+			$this->db->select('*');
+			$this->db->where('dep_id', $id);
+			$query = $this->db->get('job_titles');
+			
+			foreach($query->result() as $key=>$value) {
+				$data[$key] = $value;
+			}
+
+			if(!empty($data)) {
+				return $data;
+			}
+		}
 	}
 ?>

@@ -47,13 +47,3 @@
     });
 
 }(jQuery));
-
-$(document).ready(function() {
-    $('#student').click(function() {
-        $('.student-submenu').toggle();
-    });
-
-    $('#exam').click(function() {
-        $('.exam-submenu').toggle();
-    });
-});

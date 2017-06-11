@@ -9,83 +9,101 @@
         	<h3 class="box-title"><?php echo $project['project_name']; ?></h3>
         </div>
 
-        <?php if(!empty($this->session->userdata('project_add_success_msg'))) { ?>
-            <div class="row" style="padding: 10px;">
-                <div class="col-md-12">
-                    <div class="bg-green disabled color-palette alert"><?php echo $this->session->userdata('project_add_success_msg'); ?></div>
-                    <?php
-                        $this->session->unset_userdata('project_add_success_msg');
-                    ?>
-                </div>
-            </div>
-        <?php } ?>
+		<div class="row">
+	        <div class="col-md-12">
+	          	<!-- Custom Tabs -->
+	          	<div class="nav-tabs-custom">
+	            	<ul class="nav nav-tabs">
+	              		<li class="active"><a href="#overview" data-toggle="tab">Overview</a></li>
+	              		<li><a href="#activities" data-toggle="tab">Activities</a></li>
+	              		<li><a href="#issues" data-toggle="tab">Issues</a></li>
+	              		<li><a href="#new_issue" data-toggle="tab">New Issue</a></li>
+	            	</ul>
+	            	<div class="tab-content">
+	              		<div class="tab-pane active" id="overview">
+		                	<div class="row">
+	        					<div class="col-md-6">
+				          			<div class="box box-default">
+				            			<div class="box-header with-border">
+					              			<i class="fa fa-thumb-tack"></i>
 
-		<form class="form-horizontal" method="POST" action="<?php echo base_url('project/add_project_info'); ?>">
-	      	<div class="box-body">
-		      	<div class="row">
-		      		a<div class="col-md-6">
-			        	<div class="form-group">
-			          		<label for="project_name" class="col-sm-4 control-label">Project Name</label>
-				          	<div class="col-sm-8">
-			            		<input type="text" class="form-control" name="project_name" id="project_name" placeholder="Project Name">
-				          	</div>
-			        	</div>
-			       	</div>
+					              			<h3 class="box-title">Track Issues</h3>
+				            			</div>
+							            <!-- /.box-header -->
+							            <div class="box-body">
+							              	<div class="callout bg-light-blue">
+							                	<h4>I am a danger callout!</h4>
 
-			       	<div class="col-md-6">
-			       		<div class="form-group">
-			          		<label for="project_budget" class="col-sm-5 control-label">Project Budget (Optional)</label>
-				          	<div class="col-sm-7">
-				          		<div class="input-group">
-					          		<input type="number" class="form-control" name="project_budget" id="project_budget" placeholder="Project Budget">
-					            	<div class="input-group-addon">
-				                    	NRS
-				                  	</div>
-					          	</div>
-					        </div>
-			        	</div>
-			       	</div>
-		       	</div>
+							                	<p>There is a problem that we need to fix. A wonderful serenity has taken possession of my entire soul,
+							                  like these sweet mornings of spring which I enjoy with my whole heart.</p>
+							              	</div>
+				            			</div>
+				            			<!-- /.box-body -->
+				          			</div>
+				          			<!-- /.box -->
+				        		</div>
+				        		<!-- /.col -->
 
-	        	<div class="row">
-	        		<div class="col-md-6">
-				        <div class="form-group">
-				            <label class="col-sm-4 control-label">Start Date (optional)</label>
+						        <div class="col-md-6">
+							        <div class="box box-default">
+							            <div class="box-header with-border">
+							              	<i class="fa fa-users"></i>
 
-				            <div class="col-sm-8">
-				                <div class="input-group date">
-				                  	<div class="input-group-addon">
-				                    	<i class="fa fa-calendar"></i>
-				                  	</div>
-				                  	<input type="text" class="form-control pull-right" name="start_date" id="startDatePicker">
-				                </div>
-				            </div>
-				        </div>
-				    </div>
+							              	<h3 class="box-title">Members</h3>
+							            </div>
+							            <!-- /.box-header -->
+							            <div class="box-body">
+							              	<div class="callout bg-aqua">
+							                	<h4>I am a danger callout!</h4>
 
-				    <div class="col-md-6">
-				        <div class="form-group">
-				        	<label class="col-sm-4 control-label">End Date (Optional)</label>
-
-				            <div class="col-sm-8">
-				                <div class="input-group date">
-				                  	<div class="input-group-addon">
-				                    	<i class="fa fa-calendar"></i>
-				                  	</div>
-				                  	<input type="text" class="form-control pull-right" name="end_date" id="endDatePicker">
-				                </div>
-				            </div>
-				        </div>
-				    </div>
-			    </div>
-	      	</div>
-	      <!-- /.box-body -->
-	      	<div class="box-footer">
-	        	<button type="submit" class="btn btn-info pull-right submit-button">Create</button>
-	        	<button type="submit" class="btn btn-default pull-right">Cancel</button>
-	      	</div>
-	      	<!-- /.box-footer -->
-	    </form>
+							                	<p>There is a problem that we need to fix. A wonderful serenity has taken possession of my entire soul,
+							                  like these sweet mornings of spring which I enjoy with my whole heart.</p>
+							              	</div>
+							            </div>
+						            	<!-- /.box-body -->
+						          	</div>
+						          	<!-- /.box -->
+						        </div>
+				        		<!-- /.col -->
+				      		</div>
+	              		</div>
+	              		<!-- /.tab-pane -->
+		              	<div class="tab-pane" id="activities">
+			                The European languages are members of the same family. Their separate existence is a myth.
+			                For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ
+			                in their grammar, their pronunciation and their most common words. Everyone realizes why a
+			                new common language would be desirable: one could refuse to pay expensive translators. To
+			                achieve this, it would be necessary to have uniform grammar, pronunciation and more common
+			                words. If several languages coalesce, the grammar of the resulting language is more simple
+			                and regular than that of the individual languages.
+		              	</div>
+		              	<!-- /.tab-pane -->
+		              	<div class="tab-pane" id="issues">
+			                The European languages are members of the same family. Their separate existence is a myth.
+			                For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ
+			                in their grammar, their pronunciation and their most common words. Everyone realizes why a
+			                new common language would be desirable: one could refuse to pay expensive translators. To
+			                achieve this, it would be necessary to have uniform grammar, pronunciation and more common
+			                words. If several languages coalesce, the grammar of the resulting language is more simple
+			                and regular than that of the individual languages.
+		              	</div>
+		              	<!-- /.tab-pane -->
+		              	<div class="tab-pane" id="new_issue">
+			                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+			                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+			                when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+			                It has survived not only five centuries, but also the leap into electronic typesetting,
+			                remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
+			                sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
+			                like Aldus PageMaker including versions of Lorem Ipsum.
+		              	</div>
+	              		<!-- /.tab-pane -->
+	              	</div>
+	            </div>
+	            <!-- /.tab-content -->
+	        </div>
+	        <!-- /.col -->
+	    </div>
 	</div>
 </div>
 
@@ -96,20 +114,3 @@
 <script src="<?php echo base_url(); ?>/assets/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- bootstrap datepicker -->
 <script src="<?php echo base_url(); ?>/assets/plugins/datepicker/bootstrap-datepicker.js"></script>
-
-<script>
-
-    $('#startDatePicker').datepicker({
-    	format: "mm-yyyy",
-    	startView: "months", 
-    	minViewMode: "months",
-      	autoclose: true
-    });
-
-    $('#endDatePicker').datepicker({
-    	format: "mm-yyyy",
-    	startView: "months", 
-    	minViewMode: "months",
-      	autoclose: true
-    });
-</script>

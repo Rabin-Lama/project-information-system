@@ -5,6 +5,8 @@
 
 		function __construct() {
 			parent::__construct();
+
+			$this->load->model('project_model');
 		}
 
 		function add_new_project() {
@@ -12,6 +14,10 @@
 				$data['title'] = 'Add new project';
 				$data['module_title'] = 'Add project info';
 				$data['content_view'] = 'project/add_new_project_view';
+
+				$this->load->module('Operation'); // to pre-populate the "department field"
+				$this->load->model('operation_model');
+				$data['departments'] = $this->operation_model->select_all_departments();
 				$this->template->admin_template($data);
 			} else {
 				$this->session->set_userdata('login_error', 'Unauthorized access !');
@@ -21,7 +27,7 @@
 
 		function add_project_info() {
 			if(($this->session->userdata('username'))) {
-				$this->load->model('project_model');
+				
 
 				//ordering the input date for mysql date field...
 				$start_date = explode('-', $this->input->post('start_date'));
@@ -36,8 +42,9 @@
 							'start_date' => $start_date,
 							'end_date' => $end_date,
 							'job_title' => $this->input->post('job_title'),
-							'department' => $this->input->post('department')
-						);
+							'department_id' => $this->input->post('department_id'),
+							'project_description' => $this->input->post('project_description')
+						);print_r($data);die;
 
 				$this->project_model->insert_project_info($data);
 
@@ -52,7 +59,7 @@
 
 		/*function load_all_projects() {
 			if(($this->session->userdata('username'))) {
-				$this->load->model('project_model');
+				
 				$data = $this->project_model->select_all_projects();
 			} else {
 				$this->session->set_userdata('login_error', 'Unauthorized access !');
@@ -63,12 +70,41 @@
 		function load_project() {
 			if(($this->session->userdata('username'))) {
 				$project_id = $this->uri->segment(3);
-				$this->load->model('project_model');
+				
 				$data['project'] = $this->project_model->select_project_where($project_id);
 
 				$data['title'] = $data['project']['project_name'];
 				$data['content_view'] = 'project/project_view';
 				$this->template->admin_template($data);
+			} else {
+				$this->session->set_userdata('login_error', 'Unauthorized access !');
+				redirect('/');
+			}
+		}
+
+		function add_item_info() {
+			if(($this->session->userdata('username'))) {
+				//echo '<pre>'; print_r($this->input->post()); echo '</pre>';
+				$project_id = $this->uri->segment(3);
+				
+
+				$data = array(
+							'project_id' => $project_id = $this->uri->segment(3),
+							'item_name' => $this->input->post('')
+						);
+			} else {
+				$this->session->set_userdata('login_error', 'Unauthorized access !');
+				redirect('/');
+			}
+		}
+
+		function load_job_title_where() {
+			if(($this->session->userdata('username'))) {
+				$project_id = $this->uri->segment(3);
+				
+				$data['job_title'] = $this->project_model->select_job_title_where($project_id);
+
+				echo json_encode($data['job_title']);
 			} else {
 				$this->session->set_userdata('login_error', 'Unauthorized access !');
 				redirect('/');
