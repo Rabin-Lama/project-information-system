@@ -66,5 +66,11 @@
 				return $data;
 			}
 		}
+
+		public function insert_issue($data) {
+			$this->db->insert('issues', $data);
+
+			return true;
+		}
 	}
 ?>

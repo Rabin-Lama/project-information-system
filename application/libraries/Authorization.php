@@ -3,12 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Authorization {
     
-    function login($username, $password) {
+    function login($email, $password) {
         $CI =& get_instance(); //load model explicitly
         
         $CI->load->model('home_model');
         $password = $this->encrypt($password);
-        $data = $CI->home_model->login($username, $password);
+        $data = $CI->home_model->login($email, $password);
         return $data;
     }
 

@@ -19,6 +19,16 @@
 	              		<li><a href="#issues" data-toggle="tab">Issues</a></li>
 	              		<li><a href="#new_issue" data-toggle="tab">New Issue</a></li>
 	            	</ul>
+	            	<?php if(!empty($this->session->userdata('issue_create_success_msg'))) { ?>
+			            <div class="row" style="padding: 10px;">
+			                <div class="col-md-12">
+			                    <div class="bg-green disabled color-palette alert"><?php echo $this->session->userdata('issue_create_success_msg'); ?></div>
+			                    <?php
+			                        $this->session->unset_userdata('issue_create_success_msg');
+			                    ?>
+			                </div>
+			            </div>
+			        <?php } ?>
 	            	<div class="tab-content">
 	              		<div class="tab-pane active" id="overview">
 		                	<div class="row">
@@ -32,10 +42,11 @@
 							            <!-- /.box-header -->
 							            <div class="box-body">
 							              	<div class="callout bg-light-blue">
-							                	<h4>I am a danger callout!</h4>
+							                	<h4><a href="">Open Issues</a> : 24/60</h4>
 
-							                	<p>There is a problem that we need to fix. A wonderful serenity has taken possession of my entire soul,
-							                  like these sweet mornings of spring which I enjoy with my whole heart.</p>
+							                	<h4><a href="">Closed Issues</a> : 36/60</h4>
+
+							                	<h4><a href="">View all issues</a></h4>
 							              	</div>
 				            			</div>
 				            			<!-- /.box-body -->
@@ -53,11 +64,10 @@
 							            </div>
 							            <!-- /.box-header -->
 							            <div class="box-body">
-							              	<div class="callout bg-aqua">
-							                	<h4>I am a danger callout!</h4>
-
-							                	<p>There is a problem that we need to fix. A wonderful serenity has taken possession of my entire soul,
-							                  like these sweet mornings of spring which I enjoy with my whole heart.</p>
+							              	<div class="callout bg-light-blue">
+							                	<p>Manager : <a href="">Rabin Lama</a></p>
+							                	<p>Back end : <a href="">Rabin Lama</a>, <a href="">Rabin Lama</a></p>
+							                	<p>Front end : <a href="">Rabin Lama</a>, <a href="">Rabin Lama</a></p>
 							              	</div>
 							            </div>
 						            	<!-- /.box-body -->
@@ -89,13 +99,136 @@
 		              	</div>
 		              	<!-- /.tab-pane -->
 		              	<div class="tab-pane" id="new_issue">
-			                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-			                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-			                when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-			                It has survived not only five centuries, but also the leap into electronic typesetting,
-			                remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
-			                sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
-			                like Aldus PageMaker including versions of Lorem Ipsum.
+			                <form class="form-horizontal" method="POST" action="<?php echo base_url('project/add_new_issue'); ?>">
+			                	<div class="box-body">
+			                		<div class="row">
+			                			<div class="col-md-12">
+								        	<div class="form-group">
+								          		<label for="subject" class="col-md-2 control-label">Subject*</label>
+
+									          	<div class="col-md-10">
+								            		<input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+									          	</div>
+								        	</div>
+								        </div>
+
+								        <div class="col-md-12">
+								        	<div class="form-group">
+								        		<label for="description" class="col-md-2 control-label">Description*</label>
+
+								        		<div class="col-md-10">
+								          			<textarea id="description" class="ckeditor" name="description" rows="10" cols="80" required> </textarea>
+									          	</div>
+								        	</div>
+								        </div>
+
+								        <div class="col-md-12">
+									        <div class="col-md-6">
+									        	<div class="form-group">
+									                <label class="control-label col-md-4">Status*</label>
+
+									                <div class="col-md-8">
+										                <select class="form-control" name="status" required>
+										                	<option value="">--Select status--</option>
+										                	<option value="new">New</option>
+										                	<option value="waiting">Waiting</option>
+										                	<option value="in progress">In Progress</option>
+										                	<option value="ready for qa">Ready For QA</option>
+										                	<option value="closed">Closed</option>
+										                </select>
+											        </div>
+									            </div>
+									        </div>
+
+									        <div class="col-md-6">
+									            <div class="form-group">
+									                <label class="control-label col-md-4">Priority*</label>
+
+									                <div class="col-md-8">
+										                <select class="form-control" name="priority" required>
+										                	<option value="">--Select priority--</option>
+										                	<option value="low">Low</option>
+										                	<option value="normal">Normal</option>
+										                	<option value="high">High</option>
+										                	<option value="immediate">Immediate</option>
+										                </select>
+											        </div>
+									            </div>
+									        </div>
+								        </div>
+
+								        <div class="col-md-12">
+							        		<div class="col-md-6">
+										        <div class="form-group">	
+										            <label class="col-sm-4 control-label">Start Date*</label>
+
+										            <div class="col-sm-8">
+										                <div class="input-group date">
+										                  	<div class="input-group-addon">
+										                    	<i class="fa fa-calendar"></i>
+										                  	</div>
+										                  	<input type="text" class="form-control pull-right" name="start_date" id="startDatePicker">
+										                </div>
+										            </div>
+										        </div>
+										    </div>
+
+										    <div class="col-md-6">
+										        <div class="form-group">
+										        	<label class="col-sm-4 control-label">Due Date*</label>
+
+										            <div class="col-sm-8">
+										                <div class="input-group date">
+										                  	<div class="input-group-addon">
+										                    	<i class="fa fa-calendar"></i>
+										                  	</div>
+										                  	<input type="text" class="form-control pull-right" name="due_date" id="endDatePicker">
+										                </div>
+										            </div>
+										        </div>
+										    </div>
+										</div>
+
+								        <div class="col-md-12">
+									        <div class="col-md-6">
+									            <div class="form-group">
+									                <label class="control-label col-md-4">Assignee*</label>
+
+									                <div class="col-md-8">
+										                <select class="form-control" name="assignee" required>
+										                	<option value="">--Select assignee--</option>
+										                	<option value="new">New</option>
+										                </select>
+											        </div>
+									            </div>
+									        </div>
+
+									        <div class="col-md-6">
+									            <div class="form-group">
+									          		<label class="col-md-4 control-label">Estimated Time</label>
+									          		
+										          	<div class="col-md-8">
+										          		<div class="input-group">
+											          		<input type="number" class="form-control" name="estimated_time" placeholder="Estimated Time">
+											            	<div class="input-group-addon">
+										                    	hours
+										                  	</div>
+											          	</div>
+											        </div>
+									        	</div>
+									        </div>
+								        </div>
+
+								        <div class="col-md-12">
+								        	<input type="hidden" name="created_by" value="<?php echo $this->session->userdata('username'); ?>">
+								        	<input type="hidden" name="project_id" value="<?php echo $this->uri->segment(3); ?>">
+								        	<button type="submit" class="btn btn-info pull-right submit-button">Create</button>
+	        								<button type="reset" class="btn btn-default pull-right">Clear</button>
+	        							</div>
+								       	</div>
+			                		</div>
+			                	</div>
+			                </form>
 		              	</div>
 	              		<!-- /.tab-pane -->
 	              	</div>
@@ -114,3 +247,19 @@
 <script src="<?php echo base_url(); ?>/assets/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- bootstrap datepicker -->
 <script src="<?php echo base_url(); ?>/assets/plugins/datepicker/bootstrap-datepicker.js"></script>
+<!-- CK Editor -->
+<script src="<?php echo base_url(); ?>/assets/plugins/ckeditor/ckeditor.js"></script>
+
+<script>
+	/************************* Date picker with month and year only ************************************/
+    $('#startDatePicker').datepicker({
+    	format: "yyyy-mm-dd",
+      	autoclose: true
+    });
+
+    /************************* Date picker with month and year only ************************************/
+    $('#endDatePicker').datepicker({
+    	format: "yyyy-mm-dd",
+      	autoclose: true
+    });
+</script>

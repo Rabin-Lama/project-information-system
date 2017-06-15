@@ -30,7 +30,7 @@
                           <div class="form-top">
                             <div class="form-top-left">
                               <h3>Login to our site</h3>
-                                <p>Enter your username and password to log in:</p>
+                                <p>Enter your email and password to log in:</p>
                             </div>
                             <div class="form-top-right">
                               <i class="fa fa-key"></i>
@@ -49,8 +49,8 @@
                                     </div>
                                 <?php } ?>
                                 <div class="form-group">
-                                  <label class="sr-only" for="username">Username</label>
-                                    <input type="text" name="username" placeholder="Username..." class="form-username form-control" id="username">
+                                  <label class="sr-only" for="email">Email</label>
+                                    <input type="text" name="email" placeholder="Email..." class="form-username form-control" id="email">
                                   </div>
                                   <div class="form-group">
                                     <label class="sr-only" for="password">Password</label>

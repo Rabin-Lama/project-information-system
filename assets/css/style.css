@@ -12,3 +12,13 @@
 	width: 100%;
 	cursor: pointer;
 }
+
+.callout a {
+	color: khaki;
+	text-decoration: none;
+}
+
+.callout a:hover {
+	color: #001F3F;
+	text-decoration: none;
+}

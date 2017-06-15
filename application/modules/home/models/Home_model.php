@@ -3,19 +3,16 @@
 	
 	class Home_model extends CI_Model {
 
-		public function login($username, $password) {
+		public function login($email, $password) {
 
-			$query = "SELECT * FROM users WHERE username = '" . $username . "' AND password = '" . $password . "'";
-			$result = $this->db->query($query);
-			//echo $this->db->last_query();exit();
+			$this->db->select('*');
+			$this->db->from('employees');
+			$this->db->where('email', $email);
+			$this->db->where('password', $password);
+			$query = $this->db->get();
 
-			if($result->num_rows() > 0) {
-				foreach($result->row() as $key=>$value) {
-					$data[$key] = $value;
-				}
-
-				return $data;
-				//print_r($data);exit();
+			if($query->num_rows() > 0) {
+				return $query->row();
 			}
 		}
 	}

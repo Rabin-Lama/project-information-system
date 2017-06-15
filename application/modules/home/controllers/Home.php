@@ -12,10 +12,10 @@
 		}
 
 		function login() {
-			$username = $this->input->post('username');
+			$email = $this->input->post('email');
 			$password = $this->input->post('password');
 
-			$data['user_info'] = $this->authorization->login($username, $password);
+			$data['user_info'] = $this->authorization->login($email, $password);
 
 			if(empty($data['user_info'])) {
 				$this->session->set_userdata('login_error', 'Username / Password does not match. Please try again !');
@@ -24,11 +24,11 @@
 			}
 
 			$this->session->set_userdata(array(
-											'userid' => $data['user_info']['id'],
-											'username' => $data['user_info']['username'],
+											'userid' => $data['user_info']->id,
+											'username' => $data['user_info']->full_name,
 											'password' => $password,
-											'email' => $data['user_info']['email'],
-											'joined_date' => $data['user_info']['joined_date']
+											'email' => $data['user_info']->email,
+											'joined_date' => $data['user_info']->joined_date
 										)); //print_r($this->session->userdata());exit();
 
 			redirect('dashboard');

@@ -35,7 +35,7 @@
 				        	</div>
 
 				        	<div class="form-group">
-					            <label class="col-sm-3 control-label">DOB</label>
+					            <label for="dob" class="col-sm-3 control-label">DOB</label>
 
 					            <div class="col-sm-9">
 					                <div class="input-group date">
@@ -48,7 +48,7 @@
 					        </div>
 
 					        <div class="form-group">
-			                  	<label class="col-sm-3 control-label">Gender</label>
+			                  	<label for="gender" class="col-sm-3 control-label">Gender</label>
 
 			                  	<div class="col-sm-9">
 				                  	<select class="form-control" name="gender" id="gender">
@@ -60,7 +60,7 @@
 			                </div>
 
 					        <div class="form-group">
-			                  	<label class="col-sm-3 control-label">Marital Status</label>
+			                  	<label for="marital_status" class="col-sm-3 control-label">Marital Status</label>
 
 			                  	<div class="col-sm-9">
 				                  	<select class="form-control" name="marital_status" id="marital_status">
@@ -70,7 +70,7 @@
 				                    	<option value="divorced">Divorced</option>
 				                    	<option value="single">Single</option>
 				                  	</select>
-				                 </div>
+				                </div>
 			                </div>
 				       	</div>
 			       	</div>
@@ -134,39 +134,45 @@
 			      	<div class="row">
 			      		<div class="col-md-12">
 				        	<div class="form-group">
-				          		<label for="full_name" class="col-sm-4 control-label">Job Title</label>
+				          		<label for="job_title" class="col-sm-4 control-label">Job Title</label>
 
 					          	<div class="col-sm-8">
-				            		<input type="text" class="form-control" name="full_name" id="full_name" placeholder="Full Name">
+				            		<input type="text" class="form-control" name="job_title" id="job_title" placeholder="Job Title">
 					          	</div>
 				        	</div>
 
 				        	<div class="form-group">
-				          		<label for="current_address" class="col-sm-4 control-label">Department</label>
+				          		<label for="department" class="col-sm-4 control-label">Department</label>
 
 					          	<div class="col-sm-8">
-				            		<input type="text" class="form-control" name="current_address" id="current_address" placeholder="Current Address">
+				            		<input type="text" class="form-control" name="department" id="department" placeholder="Department">
 					          	</div>
 				        	</div>
 
 				        	<div class="form-group">
-					            <label class="col-sm-4 control-label">Joined Date</label>
+					            <label for="joined_date" class="col-sm-4 control-label">Joined Date</label>
 
 					            <div class="col-sm-8">
 					                <div class="input-group date">
 					                  	<div class="input-group-addon">
 					                    	<i class="fa fa-calendar"></i>
 					                  	</div>
-					                  	<input type="text" class="form-control pull-right" name="joined_date" id="joinedDate">
+					                  	<input type="text" class="form-control pull-right" name="joined_date" id="joined_date">
 					                </div>
 					            </div>
 					        </div>
 
 				        	<div class="form-group">
-				          		<label for="current_address" class="col-sm-4 control-label">Employment Status</label>
+				          		<label for="employment_status" class="col-sm-4 control-label">Employment Status</label>
 
 					          	<div class="col-sm-8">
-				            		<input type="text" class="form-control" name="current_address" id="current_address" placeholder="Current Address">
+					          		<select class="form-control" name="employment_status" id="employment_status">
+					          			<option value="full time permanent">Full Time Permanent</option>
+					          			<option value="part time permanent">Part Time Permanent</option>
+					          			<option value="full time contract">Full Time Contract</option>
+					          			<option value="part time contract">Part Time Contract</option>
+					          			<option value="internship">Internship</option>
+					          		</select>
 					          	</div>
 				        	</div>
 
@@ -198,125 +204,6 @@
 		    </form>
 		</div>
 	</div>
-
-	<div class="col-md-6">
-		<div class="box box-info">
-			<div class="box-header with-border">
-	        	<h3 class="box-title">Personal Information</h3>
-	        </div>
-
-	        <?php if(!empty($this->session->userdata('employee_add_success_msg'))) { ?>
-	            <div class="row" style="padding: 10px;">
-	                <div class="col-md-12">
-	                    <div class="bg-green disabled color-palette alert"><?php echo $this->session->userdata('employee_add_success_msg'); ?></div>
-	                    <?php
-	                        $this->session->unset_userdata('employee_add_success_msg');
-	                    ?>
-	                </div>
-	            </div>
-	        <?php } ?>
-
-			<form class="form-horizontal" method="POST" action="<?php echo base_url('employee/add_employee_info'); ?>">
-		      	<div class="box-body">
-			      	<div class="row">
-			      		<div class="col-md-12">
-				        	<div class="form-group">
-				          		<label for="full_name" class="col-sm-4 control-label">Full Name</label>
-
-					          	<div class="col-sm-8">
-				            		<input type="text" class="form-control" name="full_name" id="full_name" placeholder="Full Name">
-					          	</div>
-				        	</div>
-
-				        	<div class="form-group">
-				          		<label for="current_address" class="col-sm-4 control-label">Current Address</label>
-
-					          	<div class="col-sm-8">
-				            		<input type="text" class="form-control" name="current_address" id="current_address" placeholder="Current Address">
-					          	</div>
-				        	</div>
-
-				        	<div class="form-group">
-					            <label class="col-sm-4 control-label">DOB</label>
-
-					            <div class="col-sm-8">
-					                <div class="input-group date">
-					                  	<div class="input-group-addon">
-					                    	<i class="fa fa-calendar"></i>
-					                  	</div>
-					                  	<input type="text" class="form-control pull-right" name="dob" id="dob">
-					                </div>
-					            </div>
-					        </div>
-
-					        <div class="form-group">
-			                  	<label class="col-sm-4 control-label">Gender</label>
-
-			                  	<div class="col-sm-8">
-				                  	<select class="form-control" name="gender" id="gender">
-				                    	<option value="male">Male</option>
-				                    	<option value="female">Female</option>
-				                    	<option value="other">Other</option>
-				                  	</select>
-				                 </div>
-			                </div>
-
-					        <div class="form-group">
-			                  	<label class="col-sm-4 control-label">Marital Status</label>
-
-			                  	<div class="col-sm-8">
-				                  	<select class="form-control" name="marital_status" id="marital_status">
-				                    	<option value="married">Married</option>
-				                    	<option value="widowed">Widowed</option>
-				                    	<option value="separated">Separated</option>
-				                    	<option value="divorced">Divorced</option>
-				                    	<option value="single">Single</option>
-				                  	</select>
-				                 </div>
-			                </div>
-
-				        	<div class="form-group">
-					            <label class="col-sm-4 control-label">Joined Date</label>
-
-					            <div class="col-sm-8">
-					                <div class="input-group date">
-					                  	<div class="input-group-addon">
-					                    	<i class="fa fa-calendar"></i>
-					                  	</div>
-					                  	<input type="text" class="form-control pull-right" name="joined_date" id="joinedDate">
-					                </div>
-					            </div>
-					        </div>
-
-				        	<div class="form-group">
-				          		<label for="salary" class="col-sm-4 control-label">Salary</label>
-
-					          	<div class="col-sm-8">
-					          		<div class="input-group">
-						          		<input type="number" class="form-control" name="salary" id="salary" placeholder="Salary">
-						            	<div class="input-group-addon">
-					                    	NRS
-					                  	</div>
-						          	</div>
-						        </div>
-				        	</div>
-				       	</div>
-
-				       	<!-- <div class="col-md-6">
-				       		&nbsp;
-				       	</div> -->
-			       	</div>
-			    </div>
-		      <!-- /.box-body -->
-		      	<div class="box-footer">
-		        	<button type="submit" class="btn btn-info pull-right submit-button">Create</button>
-		        	<button type="submit" class="btn btn-default pull-right">Cancel</button>
-		      	</div>
-		      	<!-- /.box-footer -->
-		    </form>
-		</div>
-	</div>
-</div>
 </div>
 
 

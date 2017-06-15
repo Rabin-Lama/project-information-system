@@ -111,6 +111,32 @@
 			}
 		}
 
+		function add_new_issue() {
+			if(($this->session->userdata('username'))) {
+				$data = array(
+						'project_id' => $this->input->post('project_id'),
+						'created_by' => $this->input->post('created_by'),
+						'assignee' => $this->input->post('assignee'),
+						'subject' => $this->input->post('subject'),
+						'description' => $this->input->post('description'),
+						'status' => $this->input->post('status'),
+						'priority' => $this->input->post('priority'),
+						'start_date' => $this->input->post('start_date'),
+						'due_date' => $this->input->post('due_date'),
+						'estimated_time' => $this->input->post('estimated_time')
+					);
+				
+				$this->project_model->insert_issue($data);
+
+				$this->session->set_userdata('issue_create_success_msg', 'Issue Created Successfully !');
+
+				redirect('project/load_project/'.$this->input->post('project_id'));
+			} else {
+				$this->session->set_userdata('login_error', 'Unauthorized access !');
+				redirect('/');
+			}
+		}
+
 		function create_excel() {
 			//load our new PHPExcel library
 			$this->load->library('excel');
