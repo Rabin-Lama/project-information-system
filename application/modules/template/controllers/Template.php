@@ -7,7 +7,7 @@
 			parent::__construct();
 		}
 
-		function admin_template($data = NULL) {		
+		function admin_template($data = NULL) {
 			$this->load->module('project');
 			$this->load->model('project_model');
 

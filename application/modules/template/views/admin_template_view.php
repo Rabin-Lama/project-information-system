@@ -7,20 +7,28 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/ionicons.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/ionicons.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the 'css/skins' folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/css/skins/skin-blue.min.css">
+  <!-- daterange picker -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/daterangepicker/daterangepicker-bs3.css">
+  <!-- bootstrap datepicker -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datepicker/datepicker3.css">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/select2/select2.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/dist/css/AdminLTE.min.css">
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/css/AdminLTE.min.css">
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/style.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
   <!-- Favicon -->
   <link rel="icon" href="<?php echo base_url('assets/img/favicon.png') ?>" type="image/x-icon"/>
+  <!-- Checkbox stylesheet -->
+  <link href="<?php echo base_url(); ?>assets/plugins/icheck/square/blue.css" rel="stylesheet">
+ 
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -29,7 +37,7 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini" data-base="<?php echo base_url(); ?>">
 <!-- Site wrapper -->
 <div class="wrapper">
 
@@ -67,7 +75,7 @@
                   <li><!-- start message -->
                     <a href="#">
                       <div class="pull-left">
-                        <img src="<?php echo base_url(); ?>/assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <img src="<?php echo base_url(); ?>assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Support Team
@@ -138,13 +146,13 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?php echo base_url(); ?>/assets/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="<?php echo base_url(); ?>assets/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
               <span class="hidden-xs"><?php echo $this->session->userdata('username'); ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="<?php echo base_url(); ?>/assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="<?php echo base_url(); ?>assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
                   <?php echo $this->session->userdata('username'); ?> - Web Developer
@@ -195,7 +203,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo base_url(); ?>/assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="<?php echo base_url(); ?>assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php echo $this->session->userdata('username'); ?></p>
@@ -216,25 +224,58 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header">Project Information System</li>
-        <li class="treeview <?php echo ($this->uri->segment(1)=='dashboard') ? 'active':''; ?>">
+        <li class="treeview <?php echo ($this->uri->segment(1)=='dashboard') ? 'active' : ''; ?>">
           <a href="<?php echo base_url(); ?>dashboard">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
-        <li class="treeview <?php echo ($this->uri->segment(2)=='add_new_project') ? 'active':''; ?>">
+        <li class="treeview <?php echo ($this->uri->segment(2)=='add_new_project') ? 'active' : ''; ?>">
           <a href="<?php echo base_url(); ?>project/add_new_project">
             <i class="fa fa-plus"></i> <span>Add new project ...</span>
           </a>
         </li>
-        <li class="treeview <?php echo ($this->uri->segment(2)=='add_new_employee') ? 'active':''; ?>">
-          <a href="<?php echo base_url(); ?>employee/add_new_employee">
-            <i class="fa fa-user-plus"></i> <span>Add new employee ...</span>
+        <li class="treeview <?php echo ($this->uri->segment(1)=='employee') ? 'active' : ''; ?>">
+          <a href="#">
+            <i class="fa fa-users"></i>
+            <span>Employee</span>
+            <i class="fa fa-angle-left pull-right"></i>
           </a>
+          <ul class="treeview-menu">
+            <li class="treeview <?php echo ($this->uri->segment(2)=='add_new_employee') ? 'active':''; ?>">
+              <a href="<?php echo base_url(); ?>employee/add_new_employee">
+                <i class="fa fa-user-plus"></i> <span>Add new employee ...</span>
+              </a>
+            </li>
+            <li class="treeview <?php echo ($this->uri->segment(2)=='view_employee') ? 'active':''; ?>">
+              <a href="<?php echo base_url(); ?>employee/view_employee">
+                <i class="fa fa-eye"></i> <span>View/Edit employee</span>
+              </a>
+            </li>
+          </ul>
         </li>
-        <li class="treeview <?php echo ($this->uri->segment(2)=='add_operation_info') ? 'active':''; ?>">
-          <a href="<?php echo base_url(); ?>operation/add_operation_info">
-            <i class="fa fa-plus"></i> <span>Add operation info ...</span>
+        <li class="treeview <?php echo ($this->uri->segment(1)=='setups') ? 'active' : ''; ?>">
+          <a href="#">
+            <i class="fa fa-snowflake-o"></i>
+            <span>Setups</span>
+            <i class="fa fa-angle-left pull-right"></i>
           </a>
+          <ul class="treeview-menu">
+            <li class="treeview <?php echo ($this->uri->segment(2)=='add_department') ? 'active':''; ?>">
+              <a href="<?php echo base_url(); ?>setups/add_department">
+                <i class="fa fa-plus"></i> <span>Add department</span>
+              </a>
+            </li>
+            <li class="treeview <?php echo ($this->uri->segment(2)=='add_job_title') ? 'active':''; ?>">
+              <a href="<?php echo base_url(); ?>setups/add_job_title">
+                <i class="fa fa-plus"></i> <span>Add job title</span>
+              </a>
+            </li>
+            <li class="treeview <?php echo ($this->uri->segment(2)=='assign_privileges') ? 'active':''; ?>">
+              <a href="<?php echo base_url(); ?>setups/assign_privileges">
+                <i class="fa fa-plus"></i> <span>Assign privileges</span>
+              </a>
+            </li>
+          </ul>
         </li>
         <li class="treeview">
           <a href="#">
@@ -373,7 +414,7 @@
             <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
           </ul>
         </li>
-        <li><a href="<?php echo base_url(); ?>/assets/documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+        <li><a href="<?php echo base_url(); ?>assets/documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
         <li class="header">LABELS</li>
         <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
         <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
@@ -622,17 +663,28 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 2.2.0 -->
-<script src="<?php echo base_url(); ?>/assets/plugins/jQuery/jQuery-2.2.0.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/plugins/jQuery/jQuery-2.2.0.min.js"></script>
+<!-- date-range-picker -->
+<script src="<?php echo base_url(); ?>assets/js/moment.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap datepicker -->
+<script src="<?php echo base_url(); ?>assets/plugins/datepicker/bootstrap-datepicker.js"></script>
+<!-- Select2 -->
+<script src="<?php echo base_url(); ?>assets/plugins/select2/select2.full.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
-<script src="<?php echo base_url(); ?>/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/bootstrap/js/bootstrap.min.js"></script>
 <!-- SlimScroll -->
-<script src="<?php echo base_url(); ?>/assets/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
-<script src="<?php echo base_url(); ?>/assets/plugins/fastclick/fastclick.js"></script>
+<script src="<?php echo base_url(); ?>assets/plugins/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="<?php echo base_url(); ?>/assets/dist/js/app.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/dist/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="<?php echo base_url(); ?>/assets/dist/js/demo.js"></script>
+<script src="<?php echo base_url(); ?>assets/dist/js/demo.js"></script>
+<!-- iCheck for checkbox -->
+<script src="<?php echo base_url(); ?>assets/plugins/icheck/icheck.min.js"></script>
+<!-- Custom script -->
+<script src="<?php echo base_url(); ?>assets/js/custom.js"></script>
 </body>
 </html>
  

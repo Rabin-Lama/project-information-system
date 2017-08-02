@@ -38,16 +38,9 @@
                             </div>
                             <div class="form-bottom">
                               <form role="form" action="<?php echo base_url('home/login'); ?>" method="post" class="login-form">
-                                <?php if(!empty($this->session->userdata('login_error'))) { ?>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="alert alert-danger"><?php echo $this->session->userdata('login_error'); ?></div>
-                                            <?php
-                                                $this->session->unset_userdata('login_error');
-                                            ?>
-                                        </div>
-                                    </div>
-                                <?php } ?>
+
+                                <?php $this->load->view('template/flash_msg'); ?>
+                                
                                 <div class="form-group">
                                   <label class="sr-only" for="email">Email</label>
                                     <input type="text" name="email" placeholder="Email..." class="form-username form-control" id="email">

@@ -5,6 +5,7 @@
 
 		function __construct() {
 			parent::__construct();
+			$this->load->model('employee_model');
 		}
 
 		function add_new_employee() {
@@ -21,7 +22,7 @@
 
 		function add_employee_info() {
 			if(($this->session->userdata('username'))) {
-				$this->load->model('employee_model');
+				
 				$data = array(
 						'full_name' => $this->input->post('full_name'),
 						'dob' => $this->input->post('dob'),
@@ -41,6 +42,16 @@
 
 				print_r($data);die;
 				$this->employee_model->insert_employee_info($data);
+			} else {
+				$this->session->set_userdata('login_error', 'Unauthorized access !');
+				redirect('/');
+			}
+		}
+
+		function edit_employee_info() {
+			if(($this->session->userdata('username'))) {
+				
+				
 			} else {
 				$this->session->set_userdata('login_error', 'Unauthorized access !');
 				redirect('/');

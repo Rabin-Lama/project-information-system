@@ -15,9 +15,9 @@
 				$data['module_title'] = 'Add project info';
 				$data['content_view'] = 'project/add_new_project_view';
 
-				$this->load->module('Operation'); // to pre-populate the "department field"
-				$this->load->model('operation_model');
-				$data['departments'] = $this->operation_model->select_all_departments();
+				$this->load->module('Setups'); // to pre-populate the "department field"
+				$this->load->model('setups_model');
+				$data['departments'] = $this->setups_model->select_all_departments();
 				$this->template->admin_template($data);
 			} else {
 				$this->session->set_userdata('login_error', 'Unauthorized access !');

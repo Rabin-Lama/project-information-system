@@ -4,16 +4,7 @@
         	<h3 class="box-title"><?php echo $module_title1; ?> <span style="font-size: 16px">(* are mandatory fields)</span></h3>
         </div>
 
-        <?php if(!empty($this->session->userdata('department_added'))) { ?>
-            <div class="row" style="padding: 10px;">
-                <div class="col-md-12">
-                    <div class="bg-green disabled color-palette alert"><?php echo $this->session->userdata('department_added'); ?></div>
-                    <?php
-                        $this->session->unset_userdata('department_added');
-                    ?>
-                </div>
-            </div>
-        <?php } ?>
+        <?php $this->load->view('template/flash_msg'); ?>
 
 		<form class="form-horizontal" method="POST" action="<?php echo base_url('operation/add_department'); ?>">
 	      	<div class="box-body">
