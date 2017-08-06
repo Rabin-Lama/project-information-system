@@ -51,8 +51,14 @@ $('#endDatePicker').datepicker({
     autoclose: true
 });
 
+fetch_privileges_ajax(); //fetch privileges data on page load
+
 $('.select_job_title_to_assign_privilege').change(function() {
-    var job_title_id = $(this).val();
+    fetch_privileges_ajax();
+});
+
+function fetch_privileges_ajax() {
+    var job_title_id = $('.select_job_title_to_assign_privilege').val();
 
     $.ajax({
         url: base_url + 'setups/fetch_privileges',
@@ -60,22 +66,26 @@ $('.select_job_title_to_assign_privilege').change(function() {
         dataType: 'json',
         data: {'job_title_id': job_title_id},
         success: function(data) {
-            //
+            $('.privileges_table > tbody').html(data);
         },
         error: function() {
             //
         }
     });
-});
+}
 
-/* Script for iCheck checkbox */
-$(document).ready(function(){
-    $('input').iCheck({
-        checkboxClass: 'icheckbox_square-blue',
-        radioClass: 'iradio_square-blue',
-        increaseArea: '20%' // optional
-    });
-});
+/* for loading icheck for checkbox input */
+// $('body').on('mouseover', 'body' function() {
+//     $('.icheck').iCheck({
+//         checkboxClass: 'icheckbox_square-blue',
+//         radioClass: 'iradio_square-blue',
+//         increaseArea: '20%' // optional
+//     });
+// });
+
+function load_icheck() {
+    var select = $('.icheck');
+}
 
 /************************** Script to add new textboxes for job title start *************************/
 $(document).ready(function() {

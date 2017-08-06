@@ -50,7 +50,7 @@
 					      	</tr>
 					    </thead>
 					    <tbody>
-					      	
+					      	<!-- data here is rendered via ajax according to the selection made in the 'Select job title' drop down -->
 					    </tbody>
 					  </table>
 			    	</div>

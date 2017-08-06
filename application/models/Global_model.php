@@ -18,7 +18,7 @@
             if((!empty($params['select']))) {
     	        $this->db->select($params['select']);
             }
-            
+
 	        $this->db->from($params['table']);
 
 	        if(!empty($params['where'])) {
@@ -36,6 +36,10 @@
 	        return $this->db->get();
 	    }
 
+        public function update($params) {
+            
+        }
+
 	    public function select_with_join($params) {
             if(isset($params['limit'])) {
                     $this->db->limit($params['limit']);
@@ -49,10 +53,8 @@
                     $this->db->group_by($params['group_by']);
             }
 
-            if(!empty($params['select'])) {
-                foreach($params['select'] as $value) {
-                        $this->db->select($value);
-                }
+            if(isset($params['select'])) {
+                    $this->db->select($params['select']);
             }
 
             $this->db->from($params['table']);
@@ -65,11 +67,11 @@
 
             if(!empty($params['join'])) {
                 foreach($params['join'] as $key=>$value) {
-                        $this->db->join($key, $value, $params['join_position']);// ? $params['join_position'] : '');
+                        $this->db->join($key, $value, isset($params['join_position']) ? $params['join_position'] : '');
                 }
             }
 
-            $this->db->get(); echo $this->db->last_query();die;            
+            return $this->db->get();
     	}
 	}
 ?>

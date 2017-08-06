@@ -76,19 +76,31 @@
 				$job_titles = $this->input->post('job_titles');
 
 				foreach($job_titles as $job_title) {
-					$data[]['job_title'] = ucwords(strtolower($job_title));
+					$select_job_title_params = array(
+							'select' => '*',
+							'table' => 'job_titles',
+							'where' => array(
+									'job_title' => $job_title
+								)
+						);
+					$existing_job_title = $this->global_model->select($select_job_title_params)->result();
+					if(empty($existing_job_title)) {
+						$data[]['job_title'] = ucwords(strtolower($job_title));
+					}
 				}
-				$insert_job_title_params = array(
-						'table' => 'job_titles',
-						'data_to_insert' => $data
-					);
-				$this->global_model->insert_batch($insert_job_title_params); //insert job titles
+				if(!empty($data)) {
+					$insert_job_title_params = array(
+							'table' => 'job_titles',
+							'data_to_insert' => $data
+						);
+					$this->global_model->insert_batch($insert_job_title_params); //insert job titles
+				}
 
-				$select_job_title_params = array(
+				$select_all_job_title_params = array(
 						'select' => '*',
 						'table' => 'job_titles'
 					);
-				$all_job_titles = $this->global_model->select($select_job_title_params)->result();
+				$all_job_titles = $this->global_model->select($select_all_job_title_params)->result();
 
 				$select_module_params = array(
 						'select' => '*',
@@ -99,14 +111,26 @@
 
 				foreach($all_job_titles as $job_title) {
 					foreach($all_modules as $module) {
-						$insert_privileges_params = array(
+						$select_privilege_params = array(
+								'select' => '*',
 								'table' => 'privileges',
-								'data_to_insert' => array(
+								'where' => array(
 										'job_title_id' => $job_title->id,
 										'module_id' => $module->id
 									)
 							);
-						$this->global_model->insert($insert_privileges_params); //insert default privileges
+						$existing_privilege = $this->global_model->select($select_privilege_params)->result();
+
+						if(empty($existing_privilege)) {
+							$insert_privileges_params = array(
+									'table' => 'privileges',
+									'data_to_insert' => array(
+											'job_title_id' => $job_title->id,
+											'module_id' => $module->id
+										)
+								);
+							$this->global_model->insert($insert_privileges_params); //insert default privileges
+						}
 					}
 				}
 
@@ -121,17 +145,15 @@
 			if($this->session->userdata('username')) {
 				$data['title'] = 'Setups';
 				$data['sub_title'] = 'Assign Privileges';
-
-				$params = array(
-						'table' => 'job_titles',
-					);
-
-				$this->global_model->select_with_join($params);
-				$data['job_titles'] = $this->global_model->select($params)->result();
 				$data['content_view'] = 'setups/assign_privileges_view';
 
+				$params = array(
+						'select' => '*',
+						'table' => 'job_titles'
+					);
+				$data['job_titles'] = $this->global_model->select($params)->result();
+
 				$this->template->admin_template($data);
-				// $this->setups_model->insert_privileges();
 			} else {
 				$this->session->set_flashdata('error', 'Unauthorized access !');
 				redirect('/');
@@ -140,27 +162,47 @@
 
 		function fetch_privileges() {
 			$job_title_id = $this->input->post('job_title_id');
-			$params = array(
-					'select' => '*',
-					'table' => 'privileges',
-					'where' => array('job_title_id' => $job_title_id)
-				);
 
-			$privileges_data = $this->global_model->select($params);
+			$params = array(
+					'select' => 'p.*, m.*',
+					'table' => 'privileges p',
+					'join' => array(
+							// 'job_titles j' => 'p.job_title_id = j.id',
+							'modules m' => 'p.module_id = m.id'
+						),
+					'where' => array(
+							'p.job_title_id' => $job_title_id
+						)
+				);
+			$privileges = $this->global_model->select_with_join($params)->result();
 
 			$privileges_table = '';
-			// foreach($privileges_data as $priilege) {
-				// $privileges_table .= '<tr> <td>module</td> </tr>';
-				// $privileges_table .= '<tr> <td><input type="checkbox"></td> </tr>';
-				// $privileges_table .= '<tr> <td><input type="checkbox"></td> </tr>';
-				// $privileges_table .= '<tr> <td><input type="checkbox"></td> </tr>';
-				// $privileges_table .= '<tr> <td><input type="checkbox"></td> </tr>';
-			// }
+			foreach($privileges as $value) {
+				$privileges_table .= '<tr>';
+				$privileges_table .= 	'<td><input type="hidden" name="job_title_id" value="'.$job_title_id.'">'.$value->module.'</td>';
+				$privileges_table .= 	'<td><input type="checkbox" name="a'.$value->module_id.'[add]" value="1"'.($value->p_add == 1 ? 'checked' : '').' class="icheck"></td>';
+				$privileges_table .= 	'<td><input type="checkbox" name="a'.$value->module_id.'[view]" value="1"'.($value->p_view == 1 ? 'checked' : '').' class="icheck"></td>';
+				$privileges_table .= 	'<td><input type="checkbox" name="a'.$value->module_id.'[edit]" value="1"'.($value->p_edit == 1 ? 'checked' : '').' class="icheck"></td>';
+				$privileges_table .= 	'<td><input type="checkbox" name="a'.$value->module_id.'[delete]" value="1"'.($value->p_delete == 1 ? 'checked' : '').' class="icheck"></td>';
+				$privileges_table .= '</tr>';
+			}
+
+			echo json_encode($privileges_table);
+			die;
 		}
 
 		function save_assigned_privileges() {
 			if($this->session->userdata('username')) {
+				$form_data = $this->input->post();
+				$job_title_id = reset($form_data);
+				$privileges = array_slice($form_data, 1);
 
+				foreach($privileges as $k => $v) {
+					$privileges_data[str_replace('a', '', $k)] = $v;
+				}
+
+				// only_printr($privileges_data);die;
+				$this->global_model->
 				$this->session->set_flashdata('success', 'Privileges saved successfully.');
 				redirect('setups/assign_privileges');
 			} else {
